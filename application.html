@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="pageTitle">HealthCore | Formulario de aplicación</title>
+    <meta
+      id="pageDescription"
+      name="description"
+      content="Completa tu registro en HealthCore para solicitar atención primaria, especialista o seguimiento preventivo con validación segura de datos."
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Stack+Sans+Text:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              hcNavy: "#0B1F3A",
+              hcSky: "#D7ECFF",
+              hcTeal: "#00A7A0",
+              hcAmber: "#F59E0B",
+              hcMist: "#F4F9FF"
+            },
+            fontFamily: {
+              sans: ["Plus Jakarta Sans", "sans-serif"],
+              display: ["Fraunces", "serif"],
+              stackText: ["Stack Sans Text", "sans-serif"]
+            },
+            boxShadow: {
+              soft: "0 15px 45px rgba(11,31,58,0.15)"
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      .form-shell input,
+      .form-shell select,
+      .form-shell textarea {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(215, 236, 255, 0.4);
+        color: #ffffff;
+      }
+
+      .form-shell input::placeholder,
+      .form-shell textarea::placeholder {
+        color: rgba(215, 236, 255, 0.75);
+      }
+
+      .form-shell select option {
+        background: #f4f9ff;
+        color: #0b1f3a;
+      }
+
+      .form-shell select option[disabled],
+      .form-shell select option[value=""] {
+        color: #4b5f7a;
+      }
+
+      .form-shell input:focus,
+      .form-shell select:focus,
+      .form-shell textarea:focus {
+        outline: none;
+        border-color: rgba(245, 158, 11, 0.95);
+        box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.25);
+      }
+    </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MedicalWebPage",
+        "name": "Formulario de aplicación HealthCore",
+        "description": "Formulario de registro de pacientes para la red de clínicas HealthCore.",
+        "isPartOf": {
+          "@type": "MedicalOrganization",
+          "name": "HealthCore"
+        }
+      }
+    </script>
+  </head>
+  <body class="min-h-screen bg-[#071529] text-white antialiased">
+    <header class="relative overflow-hidden text-white">
+      <div class="absolute inset-0 bg-gradient-to-br from-[#07152B] via-hcNavy to-hcTeal/80" aria-hidden="true"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(215,236,255,0.22),transparent_40%),radial-gradient(circle_at_84%_14%,rgba(245,158,11,0.20),transparent_35%)]" aria-hidden="true"></div>
+      <nav class="relative z-10 mx-auto flex max-w-5xl items-center justify-between px-6 py-5" aria-label="Navegación principal">
+        <a href="index.html" class="font-display text-2xl">HealthCore</a>
+        <div class="flex items-center gap-3">
+          <a id="navBackHome" href="index.html" class="rounded-full border border-white/50 px-4 py-2 text-sm font-semibold hover:bg-white/10">Volver a inicio</a>
+          <div class="inline-flex rounded-full border border-white/40 bg-white/10 p-1 text-xs font-semibold" aria-label="Cambiar idioma">
+            <button type="button" data-lang-switch="es" class="rounded-full px-3 py-1 text-white transition hover:bg-white/15">ES</button>
+            <button type="button" data-lang-switch="en" class="rounded-full px-3 py-1 text-white transition hover:bg-white/15">EN</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="relative overflow-hidden px-6 py-10">
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_10%,rgba(215,236,255,0.12),transparent_40%),radial-gradient(circle_at_92%_86%,rgba(245,158,11,0.14),transparent_35%)]" aria-hidden="true"></div>
+
+      <section class="form-shell relative z-10 mx-auto max-w-5xl rounded-3xl border border-white/20 bg-white/10 p-6 shadow-soft backdrop-blur-sm sm:p-8">
+        <h1 id="formTitle" class="font-stackText text-3xl text-white sm:text-4xl">Formulario de aplicación / registro</h1>
+        <p id="formIntro" class="mt-3 max-w-3xl text-hcSky">
+          Completa tus datos para que nuestro equipo coordine la atención adecuada. Solicitamos información clínica y administrativa esencial para acceso, seguimiento y cumplimiento normativo.
+        </p>
+
+        <div id="formAlert" class="mt-6 hidden rounded-xl border px-4 py-3 text-sm" role="alert" aria-live="polite"></div>
+
+        <form id="applicationForm" class="mt-8 grid gap-6" novalidate>
+          <fieldset class="form-step grid gap-4" data-step-index="0">
+            <legend id="legendPersonal" class="font-stackText text-lg font-semibold text-white">Datos personales</legend>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label for="firstName" class="mb-1 block text-sm font-medium text-hcSky">Nombre *</label>
+                <input id="firstName" name="firstName" type="text" autocomplete="given-name" class="w-full rounded-xl border border-slate-300 px-4 py-3" aria-describedby="firstNameError" />
+                <p id="firstNameError" class="mt-1 min-h-[1.25rem] text-sm text-red-700"></p>
+              </div>
+              <div>
+                <label for="lastName" class="mb-1 block text-sm font-medium text-hcSky">Apellido *</label>
+                <input id="lastName" name="lastName" type="text" autocomplete="family-name" class="w-full rounded-xl border border-slate-300 px-4 py-3" aria-describedby="lastNameError" />
+                <p id="lastNameError" class="mt-1 min-h-[1.25rem] text-sm text-red-700"></p>
+              </div>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label for="email" class="mb-1 block text-sm font-medium text-hcSky">Email *</label>
+                <input id="email" name="email" type="email" autocomplete="email" class="w-full rounded-xl border border-slate-300 px-4 py-3" aria-describedby="emailError" />
+                <p id="emailError" class="mt-1 min-h-[1.25rem] text-sm text-red-700"></p>
+              </div>
+              <div>
+                <label for="phone" class="mb-1 block text-sm font-medium text-hcSky">Teléfono *</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" class="w-full rounded-xl border border-slate-300 px-4 py-3" aria-describedby="phoneError" placeholder="+1 555 123 4567" />
+                <p id="phoneError" class="mt-1 min-h-[1.25rem] text-sm text-red-700"></p>
+              </div>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label for="birthDate" class="mb-1 block text-sm font-medium text-hcSky">Fecha de nacimiento *</label>
+                <input id="birthDate" name="birthDate" type="date" class="w-full rounded-xl border border-slate-300 px-4 py-3" aria-describedby="birthDateError" />
+                <p id="birthDateError" class="mt-1 min-h-[1.25rem] text-sm text-red-700"></p>
+              </div>
+              <div>
+                <label for="preferredLanguage" class="mb-1 block text-sm font-medium text-hcSky">Idioma preferido *</label>
+                <select id="preferredLanguage" name="preferredLanguage" class="w-full rounded-xl border border-slate-300 px-4 py-3" aria-describedby="preferredLanguageError">
+                  <option value="">Selecciona una opción</option>
+                  <option value="en">Inglés</option>
+                  <option value="es">Español</option>
+                </select>
+                <p id="preferredLanguageError" class="mt-1 min-h-[1.25rem] text-sm text-red-700"></p>
+              </div>
+            </div>
+            <div class="flex justify-end pt-2">
+              <button id="step0Next" type="button" data-step-next="0" class="rounded-full bg-hcAmber px-5 py-2.5 text-sm font-semibold text-hcNavy transition hover:-translate-y-0.5 hover:bg-amber-300">Siguiente</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-step hidden grid gap-4" data-step-index="1">
+            <legend id="legendAccess" class="font-stackText text-lg font-semibold text-white">Acceso y atención solicitada</legend>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label for="country" class="mb-1 block text-sm font-medium text-hcSky">País de atención *</label>
+                <select id="country" name="country" class="w-full rounded-xl border border-slate-300 px-4 py-3" aria-describedby="countryError">
+                  <option value="">Selecciona un país</option>
+                  <option value="US">Estados Unidos</option>
+                  <option value="UK">Reino Unido</option>
+                </select>
+                <p id="countryError" class="mt-1 min-h-[1.25rem] text-sm text-red-700"></p>
+              </div>
+              <div>
+                <label for="clinicRegion" class="mb-1 block text-sm font-medium text-hcSky">Región / sede preferida *</label>
+                <select id="clinicRegion" name="clinicRegion" class="w-full rounded-xl border border-slate-300 px-4 py-3" aria-describedby="clinicRegionError">
+                  <option value="">Selecciona una región</option>
+                  <option value="Texas">Texas</option>
+                  <option value="Florida">Florida</option>
+                  <option value="Georgia">Georgia</option>
+                  <option value="London">Londres</option>
+                  <option value="Manchester">Manchester</option>
+                </select>
+                <p id="clinicRegionError" class="mt-1 min-h-[1.25rem] text-sm text-red-700"></p>
+              </div>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label for="serviceType" class="mb-1 block text-sm font-medium text-hcSky">Servicio requerido *</label>
+                <select id="serviceType" name="serviceType" class="w-full rounded-xl border border-slate-300 px-4 py-3" aria-describedby="serviceTypeError">
+                  <option value="">Selecciona un servicio</option>
+                  <option value="primary-care">Atención primaria</option>
+                  <option value="specialist">Consulta con especialista</option>
+                  <option value="chronic-care">Gestión de enfermedad crónica</option>
+                  <option value="preventive">Programa de salud preventiva</option>
+                </select>
+                <p id="serviceTypeError" class="mt-1 min-h-[1.25rem] text-sm text-red-700"></p>
+              </div>
+              <div>
+                <label for="preferredDate" class="mb-1 block text-sm font-medium text-hcSky">Fecha preferida de cita *</label>
+                <input id="preferredDate" name="preferredDate" type="date" class="w-full rounded-xl border border-slate-300 px-4 py-3" aria-describedby="preferredDateError" />
+                <p id="preferredDateError" class="mt-1 min-h-[1.25rem] text-sm text-red-700"></p>
+              </div>
+            </div>
+            <div class="flex items-center justify-between pt-2">
+              <button id="step1Prev" type="button" data-step-prev="1" class="rounded-full border border-white/40 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10">Atrás</button>
+              <button id="step1Next" type="button" data-step-next="1" class="rounded-full bg-hcAmber px-5 py-2.5 text-sm font-semibold text-hcNavy transition hover:-translate-y-0.5 hover:bg-amber-300">Siguiente</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-step hidden grid gap-4" data-step-index="2">
+            <legend id="legendCoverage" class="font-stackText text-lg font-semibold text-white">Cobertura y facturación</legend>
+            <div class="grid gap-4 sm:grid-cols-3">
+              <div>
+                <label for="payerType" class="mb-1 block text-sm font-medium text-hcSky">Tipo de cobertura *</label>
+                <select id="payerType" name="payerType" class="w-full rounded-xl border border-slate-300 px-4 py-3" aria-describedby="payerTypeError">
+                  <option value="">Selecciona</option>
+                  <option value="private-insurance">Seguro privado</option>
+                  <option value="medicare-medicaid">Medicare / Medicaid</option>
+                  <option value="nhs">NHS</option>
+                  <option value="self-pay">Pago directo</option>
+                </select>
+                <p id="payerTypeError" class="mt-1 min-h-[1.25rem] text-sm text-red-700"></p>
+              </div>
+              <div>
+                <label for="insuranceProvider" class="mb-1 block text-sm font-medium text-hcSky">Aseguradora (si aplica) *</label>
+                <input id="insuranceProvider" name="insuranceProvider" type="text" class="w-full rounded-xl border border-slate-300 px-4 py-3" aria-describedby="insuranceProviderError" />
+                <p id="insuranceProviderError" class="mt-1 min-h-[1.25rem] text-sm text-red-700"></p>
+              </div>
+              <div>
+                <label for="policyNumber" class="mb-1 block text-sm font-medium text-hcSky">Número de póliza (si aplica) *</label>
+                <input id="policyNumber" name="policyNumber" type="text" class="w-full rounded-xl border border-slate-300 px-4 py-3" aria-describedby="policyNumberError" />
+                <p id="policyNumberError" class="mt-1 min-h-[1.25rem] text-sm text-red-700"></p>
+              </div>
+            </div>
+            <p id="coverageHint" class="text-sm text-hcSky">Para solicitudes en US con seguro, aseguradora y póliza son obligatorios.</p>
+            <div class="flex items-center justify-between pt-2">
+              <button id="step2Prev" type="button" data-step-prev="2" class="rounded-full border border-white/40 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10">Atrás</button>
+              <button id="step2Next" type="button" data-step-next="2" class="rounded-full bg-hcAmber px-5 py-2.5 text-sm font-semibold text-hcNavy transition hover:-translate-y-0.5 hover:bg-amber-300">Siguiente</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-step hidden grid gap-4" data-step-index="3">
+            <legend id="legendFollowUp" class="font-stackText text-lg font-semibold text-white">Seguimiento y cumplimiento</legend>
+            <div>
+              <label for="healthNotes" class="mb-1 block text-sm font-medium text-hcSky">Condiciones crónicas o antecedentes relevantes *</label>
+              <textarea id="healthNotes" name="healthNotes" rows="4" class="w-full rounded-xl border border-slate-300 px-4 py-3" aria-describedby="healthNotesError" placeholder="Describe medicación actual, diagnósticos o escribe 'No aplica'."></textarea>
+              <p id="healthNotesError" class="mt-1 min-h-[1.25rem] text-sm text-red-700"></p>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label for="contactMethod" class="mb-1 block text-sm font-medium text-hcSky">Canal preferido de contacto *</label>
+                <select id="contactMethod" name="contactMethod" class="w-full rounded-xl border border-slate-300 px-4 py-3" aria-describedby="contactMethodError">
+                  <option value="">Selecciona un canal</option>
+                  <option value="phone">Llamada telefónica</option>
+                  <option value="email">Email</option>
+                  <option value="sms">SMS</option>
+                </select>
+                <p id="contactMethodError" class="mt-1 min-h-[1.25rem] text-sm text-red-700"></p>
+              </div>
+              <div>
+                <label for="bestTime" class="mb-1 block text-sm font-medium text-hcSky">Mejor horario para contacto *</label>
+                <select id="bestTime" name="bestTime" class="w-full rounded-xl border border-slate-300 px-4 py-3" aria-describedby="bestTimeError">
+                  <option value="">Selecciona horario</option>
+                  <option value="morning">Mañana</option>
+                  <option value="afternoon">Tarde</option>
+                  <option value="evening">Noche</option>
+                </select>
+                <p id="bestTimeError" class="mt-1 min-h-[1.25rem] text-sm text-red-700"></p>
+              </div>
+            </div>
+            <div class="grid gap-3">
+              <label class="inline-flex items-start gap-3">
+                <input id="consentPrivacy" name="consentPrivacy" type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" aria-describedby="consentPrivacyError" />
+                <span id="consentPrivacyText" class="text-sm text-hcSky">Confirmo que leí y acepto el tratamiento de datos de salud bajo HIPAA / UK GDPR. *</span>
+              </label>
+              <p id="consentPrivacyError" class="min-h-[1.25rem] text-sm text-red-700"></p>
+
+              <label class="inline-flex items-start gap-3">
+                <input id="consentReminders" name="consentReminders" type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" aria-describedby="consentRemindersError" />
+                <span id="consentRemindersText" class="text-sm text-hcSky">Acepto recibir recordatorios de citas para reducir ausencias. *</span>
+              </label>
+              <p id="consentRemindersError" class="min-h-[1.25rem] text-sm text-red-700"></p>
+            </div>
+          </fieldset>
+
+          <div class="hidden flex flex-wrap items-center gap-3 pt-2" data-submit-section>
+            <button id="step3Prev" type="button" data-step-prev="3" class="rounded-full border border-white/40 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10">Atrás</button>
+            <button id="submitButton" type="submit" class="rounded-full bg-hcAmber px-6 py-3 font-semibold text-hcNavy transition hover:-translate-y-0.5 hover:bg-amber-300">Enviar aplicación</button>
+            <p id="requiredHint" class="text-sm text-hcSky">Todos los campos marcados con * son obligatorios.</p>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="border-t border-white/10 bg-[#071426]">
+      <div id="footerCopy" class="mx-auto max-w-5xl px-6 py-5 text-sm text-hcSky">© 2026 HealthCore. Registro seguro para atención ambulatoria.</div>
+    </footer>
+
+    <script>
+      const APPLICATION_TRANSLATIONS = {
+        es: {
+          title: "HealthCore | Formulario de aplicación",
+          description:
+            "Completa tu registro en HealthCore para solicitar atención primaria, especialista o seguimiento preventivo con validación segura de datos.",
+          navBackHome: "Volver a inicio",
+          formTitle: "Formulario de aplicación / registro",
+          formIntro:
+            "Completa tus datos para que nuestro equipo coordine la atención adecuada. Solicitamos información clínica y administrativa esencial para acceso, seguimiento y cumplimiento normativo.",
+          legendPersonal: "Datos personales",
+          legendAccess: "Acceso y atención solicitada",
+          legendCoverage: "Cobertura y facturación",
+          legendFollowUp: "Seguimiento y cumplimiento",
+          coverageHint: "Para solicitudes en US con seguro, aseguradora y póliza son obligatorios.",
+          consentPrivacyText: "Confirmo que leí y acepto el tratamiento de datos de salud bajo HIPAA / UK GDPR. *",
+          consentRemindersText: "Acepto recibir recordatorios de citas para reducir ausencias. *",
+          submitButton: "Enviar aplicación",
+          stepNext: "Siguiente",
+          stepPrev: "Atrás",
+          requiredHint: "Todos los campos marcados con * son obligatorios.",
+          footerCopy: "© 2026 HealthCore. Registro seguro para atención ambulatoria.",
+          firstNameLabel: "Nombre *",
+          lastNameLabel: "Apellido *",
+          emailLabel: "Email *",
+          phoneLabel: "Teléfono *",
+          birthDateLabel: "Fecha de nacimiento *",
+          preferredLanguageLabel: "Idioma preferido *",
+          preferredLanguagePlaceholder: "Selecciona una opción",
+          preferredLanguageEn: "Inglés",
+          preferredLanguageEs: "Español",
+          countryLabel: "País de atención *",
+          countryPlaceholder: "Selecciona un país",
+          countryUS: "Estados Unidos",
+          countryUK: "Reino Unido",
+          clinicRegionLabel: "Región / sede preferida *",
+          clinicRegionPlaceholder: "Selecciona una región",
+          clinicRegionLondon: "Londres",
+          serviceTypeLabel: "Servicio requerido *",
+          serviceTypePlaceholder: "Selecciona un servicio",
+          serviceTypePrimary: "Atención primaria",
+          serviceTypeSpecialist: "Consulta con especialista",
+          serviceTypeChronic: "Gestión de enfermedad crónica",
+          serviceTypePreventive: "Programa de salud preventiva",
+          preferredDateLabel: "Fecha preferida de cita *",
+          payerTypeLabel: "Tipo de cobertura *",
+          payerTypePlaceholder: "Selecciona",
+          payerTypePrivate: "Seguro privado",
+          payerTypeGovernment: "Medicare / Medicaid",
+          payerTypeSelfPay: "Pago directo",
+          insuranceProviderLabel: "Aseguradora (si aplica) *",
+          policyNumberLabel: "Número de póliza (si aplica) *",
+          healthNotesLabel: "Condiciones crónicas o antecedentes relevantes *",
+          healthNotesPlaceholder: "Describe medicación actual, diagnósticos o escribe 'No aplica'.",
+          contactMethodLabel: "Canal preferido de contacto *",
+          contactMethodPlaceholder: "Selecciona un canal",
+          contactMethodPhone: "Llamada telefónica",
+          contactMethodEmail: "Email",
+          contactMethodSms: "SMS",
+          bestTimeLabel: "Mejor horario para contacto *",
+          bestTimePlaceholder: "Selecciona horario",
+          bestTimeMorning: "Mañana",
+          bestTimeAfternoon: "Tarde",
+          bestTimeEvening: "Noche"
+        },
+        en: {
+          title: "HealthCore | Application Form",
+          description:
+            "Complete your HealthCore registration to request primary care, specialist care, or preventive follow-up with secure data validation.",
+          navBackHome: "Back to home",
+          formTitle: "Application / Registration Form",
+          formIntro:
+            "Complete your details so our team can coordinate the right care. We request essential clinical and administrative information for access, follow-up, and compliance.",
+          legendPersonal: "Personal details",
+          legendAccess: "Access and requested care",
+          legendCoverage: "Coverage and billing",
+          legendFollowUp: "Follow-up and compliance",
+          coverageHint: "For US requests with insurance, provider and policy number are required.",
+          consentPrivacyText: "I confirm that I read and accept health data processing under HIPAA / UK GDPR. *",
+          consentRemindersText: "I agree to receive appointment reminders to reduce no-shows. *",
+          submitButton: "Submit application",
+          stepNext: "Next",
+          stepPrev: "Back",
+          requiredHint: "All fields marked with * are required.",
+          footerCopy: "© 2026 HealthCore. Secure registration for outpatient care.",
+          firstNameLabel: "First name *",
+          lastNameLabel: "Last name *",
+          emailLabel: "Email *",
+          phoneLabel: "Phone *",
+          birthDateLabel: "Date of birth *",
+          preferredLanguageLabel: "Preferred language *",
+          preferredLanguagePlaceholder: "Select an option",
+          preferredLanguageEn: "English",
+          preferredLanguageEs: "Spanish",
+          countryLabel: "Country of care *",
+          countryPlaceholder: "Select a country",
+          countryUS: "United States",
+          countryUK: "United Kingdom",
+          clinicRegionLabel: "Preferred region / clinic *",
+          clinicRegionPlaceholder: "Select a region",
+          clinicRegionLondon: "London",
+          serviceTypeLabel: "Requested service *",
+          serviceTypePlaceholder: "Select a service",
+          serviceTypePrimary: "Primary care",
+          serviceTypeSpecialist: "Specialist consultation",
+          serviceTypeChronic: "Chronic care management",
+          serviceTypePreventive: "Preventive health program",
+          preferredDateLabel: "Preferred appointment date *",
+          payerTypeLabel: "Coverage type *",
+          payerTypePlaceholder: "Select",
+          payerTypePrivate: "Private insurance",
+          payerTypeGovernment: "Medicare / Medicaid",
+          payerTypeSelfPay: "Self-pay",
+          insuranceProviderLabel: "Insurance provider (if applicable) *",
+          policyNumberLabel: "Policy number (if applicable) *",
+          healthNotesLabel: "Chronic conditions or relevant history *",
+          healthNotesPlaceholder: "Describe current medication, diagnoses, or type 'Not applicable'.",
+          contactMethodLabel: "Preferred contact channel *",
+          contactMethodPlaceholder: "Select a channel",
+          contactMethodPhone: "Phone call",
+          contactMethodEmail: "Email",
+          contactMethodSms: "SMS",
+          bestTimeLabel: "Best time to contact *",
+          bestTimePlaceholder: "Select a time",
+          bestTimeMorning: "Morning",
+          bestTimeAfternoon: "Afternoon",
+          bestTimeEvening: "Evening"
+        }
+      };
+
+      function setText(selector, value) {
+        const element = document.querySelector(selector);
+        if (element && typeof value === "string") {
+          element.textContent = value;
+        }
+      }
+
+      function setMetaContent(selector, value) {
+        const element = document.querySelector(selector);
+        if (element && typeof value === "string") {
+          element.setAttribute("content", value);
+        }
+      }
+
+      function applyApplicationLanguage(lang) {
+        const t = APPLICATION_TRANSLATIONS[lang] || APPLICATION_TRANSLATIONS.es;
+        localStorage.setItem("hcLang", lang);
+        document.documentElement.lang = lang;
+        document.title = t.title;
+
+        setMetaContent('#pageDescription', t.description);
+        setText('#navBackHome', t.navBackHome);
+        setText('#formTitle', t.formTitle);
+        setText('#formIntro', t.formIntro);
+        setText('#legendPersonal', t.legendPersonal);
+        setText('#legendAccess', t.legendAccess);
+        setText('#legendCoverage', t.legendCoverage);
+        setText('#legendFollowUp', t.legendFollowUp);
+        setText('#coverageHint', t.coverageHint);
+        setText('#consentPrivacyText', t.consentPrivacyText);
+        setText('#consentRemindersText', t.consentRemindersText);
+        setText('#submitButton', t.submitButton);
+        setText('#step0Next', t.stepNext);
+        setText('#step1Next', t.stepNext);
+        setText('#step2Next', t.stepNext);
+        setText('#step1Prev', t.stepPrev);
+        setText('#step2Prev', t.stepPrev);
+        setText('#step3Prev', t.stepPrev);
+        setText('#requiredHint', t.requiredHint);
+        setText('#footerCopy', t.footerCopy);
+
+        setText('label[for="firstName"]', t.firstNameLabel);
+        setText('label[for="lastName"]', t.lastNameLabel);
+        setText('label[for="email"]', t.emailLabel);
+        setText('label[for="phone"]', t.phoneLabel);
+        setText('label[for="birthDate"]', t.birthDateLabel);
+        setText('label[for="preferredLanguage"]', t.preferredLanguageLabel);
+        setText('#preferredLanguage option[value=""]', t.preferredLanguagePlaceholder);
+        setText('#preferredLanguage option[value="en"]', t.preferredLanguageEn);
+        setText('#preferredLanguage option[value="es"]', t.preferredLanguageEs);
+
+        setText('label[for="country"]', t.countryLabel);
+        setText('#country option[value=""]', t.countryPlaceholder);
+        setText('#country option[value="US"]', t.countryUS);
+        setText('#country option[value="UK"]', t.countryUK);
+
+        setText('label[for="clinicRegion"]', t.clinicRegionLabel);
+        setText('#clinicRegion option[value=""]', t.clinicRegionPlaceholder);
+        setText('#clinicRegion option[value="London"]', t.clinicRegionLondon);
+
+        setText('label[for="serviceType"]', t.serviceTypeLabel);
+        setText('#serviceType option[value=""]', t.serviceTypePlaceholder);
+        setText('#serviceType option[value="primary-care"]', t.serviceTypePrimary);
+        setText('#serviceType option[value="specialist"]', t.serviceTypeSpecialist);
+        setText('#serviceType option[value="chronic-care"]', t.serviceTypeChronic);
+        setText('#serviceType option[value="preventive"]', t.serviceTypePreventive);
+
+        setText('label[for="preferredDate"]', t.preferredDateLabel);
+        setText('label[for="payerType"]', t.payerTypeLabel);
+        setText('#payerType option[value=""]', t.payerTypePlaceholder);
+        setText('#payerType option[value="private-insurance"]', t.payerTypePrivate);
+        setText('#payerType option[value="medicare-medicaid"]', t.payerTypeGovernment);
+        setText('#payerType option[value="self-pay"]', t.payerTypeSelfPay);
+
+        setText('label[for="insuranceProvider"]', t.insuranceProviderLabel);
+        setText('label[for="policyNumber"]', t.policyNumberLabel);
+        setText('label[for="healthNotes"]', t.healthNotesLabel);
+        setText('label[for="contactMethod"]', t.contactMethodLabel);
+        setText('#contactMethod option[value=""]', t.contactMethodPlaceholder);
+        setText('#contactMethod option[value="phone"]', t.contactMethodPhone);
+        setText('#contactMethod option[value="email"]', t.contactMethodEmail);
+        setText('#contactMethod option[value="sms"]', t.contactMethodSms);
+        setText('label[for="bestTime"]', t.bestTimeLabel);
+        setText('#bestTime option[value=""]', t.bestTimePlaceholder);
+        setText('#bestTime option[value="morning"]', t.bestTimeMorning);
+        setText('#bestTime option[value="afternoon"]', t.bestTimeAfternoon);
+        setText('#bestTime option[value="evening"]', t.bestTimeEvening);
+
+        const notes = document.getElementById('healthNotes');
+        if (notes) notes.setAttribute('placeholder', t.healthNotesPlaceholder);
+
+        document.querySelectorAll('[data-lang-switch]').forEach((button) => {
+          const isActive = button.getAttribute('data-lang-switch') === lang;
+          button.classList.toggle('bg-white', isActive);
+          button.classList.toggle('text-hcNavy', isActive);
+          button.classList.toggle('text-white', !isActive);
+        });
+
+        document.dispatchEvent(new CustomEvent('hc:languageChanged', { detail: { lang } }));
+      }
+
+      document.querySelectorAll('[data-lang-switch]').forEach((button) => {
+        button.addEventListener('click', () => {
+          applyApplicationLanguage(button.getAttribute('data-lang-switch'));
+        });
+      });
+
+      function getInitialLanguage() {
+        const savedLanguage = localStorage.getItem('hcLang');
+        if (savedLanguage === 'en' || savedLanguage === 'es') {
+          return savedLanguage;
+        }
+
+        const browserLanguage = (navigator.language || '').toLowerCase();
+        return browserLanguage.startsWith('en') ? 'en' : 'es';
+      }
+
+      applyApplicationLanguage(getInitialLanguage());
+    </script>
+
+    <script src="validation.js?v=20260513-1" defer></script>
+  </body>
+</html>
