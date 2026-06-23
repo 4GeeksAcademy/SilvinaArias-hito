@@ -1,0 +1,16 @@
+{
+  "name": "silvinaarias-hito",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "TypeScript business logic utilities for HealthCore",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "dev": "tsc --watch --noEmit",
+    "build": "tsc -p tsconfig.json",
+    "start": "npm run build && node dist/index.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}
