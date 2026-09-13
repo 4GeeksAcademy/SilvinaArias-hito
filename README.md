@@ -62,6 +62,15 @@ ai-engineering-company-project-monorepo/
 4. **Review** each top-level folder `README.md` to understand intended responsibilities (`uis/`, `services/`, `data/`, `skills/`, etc.).
 5. **Start implementing** milestone deliverables in `uis/` and `services/`, reusing `packages/shared/` and `data/` as needed.
 
+## TypeScript development (backend logic)
+
+To validate and run TypeScript logic locally:
+
+- `npm install`
+- `npm run typecheck` (type validation with no emitted files)
+- `npm run dev` (watch mode for development)
+- `npm run build` (compile output to `dist/`)
+
 ---
 
 ## Milestones (reference)

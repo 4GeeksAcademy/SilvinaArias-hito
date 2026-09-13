@@ -62,6 +62,15 @@ ai-engineering-company-project-monorepo/
 4. **Revisa** los `README.md` de cada carpeta raíz para entender responsabilidades (`uis/`, `services/`, `data/`, `skills/`, etc.).
 5. **Empieza a implementar** entregables por hito en `uis/` y `services/`, reutilizando `packages/shared/` y `data/` según corresponda.
 
+## Desarrollo TypeScript (lógica backend)
+
+Para validar y ejecutar la lógica TypeScript en local:
+
+- `npm install`
+- `npm run typecheck` (valida tipos sin emitir archivos)
+- `npm run dev` (watch mode para desarrollo)
+- `npm run build` (compila a `dist/`)
+
 ---
 
 ## Hitos (referencia)
